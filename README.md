@@ -8,6 +8,9 @@ Virtual environment:
 
     source <extracted_location>/oss-cad-suite/environment
 
+# Finished
+
+- amaranth/blink.py: Simplest gateware. Blink the three LEDs in a counting pattern.
 
 # Work in progress
 
@@ -25,4 +28,4 @@ optional arguments:
 To view simulated traces:
     gtkwave test.vcd
 
-
+![waveform blink_reset-v002](/Waveforms/blink_reset-v002.png)
