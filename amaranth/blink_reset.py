@@ -3,7 +3,7 @@ Reset the OrangeCrab on button press.
 It is amaranth implementation of a verilog project blink_reset at:
 https://github.com/orangecrab-fpga/orangecrab-examples/tree/main/verilog
 """
-__version__ = 'v0.0.2 2022-11-26'# pad_button simulated 
+__version__ = 'v0.0.3 2022-11-26'# reset button is working
 
 from amaranth import Elaboratable, Module, Signal
 from amaranth.sim import Simulator, Delay, Settle
@@ -26,7 +26,7 @@ class Blink(Elaboratable):
         blue_led = rgb.b
 
         self.pad_button = platform.request('button', 0)
-        #pad_program = platform.request('program', 0)
+        self.pad_program = platform.request('program', 0)
 
         m.d.sync += self.count.eq(self.count + 1)
         blink_rate = 24 if pargs.gen else 0
@@ -40,7 +40,7 @@ class Blink(Elaboratable):
             m.d.sync += self.count.eq( 0 )
         '''
         with m.If(self.pad_button.i == 1):
-            m.d.comb += red_led.o.eq(1)
+            m.d.sync += self.pad_program.o.eq(1)
         return m
 
 if __name__ == "__main__":
